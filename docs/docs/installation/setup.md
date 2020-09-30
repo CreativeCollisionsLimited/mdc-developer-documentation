@@ -57,7 +57,7 @@ You can ether use the example bellow and fill out the fields or copy the `.env.e
 dotenv plugin: https://github.com/vlucas/phpdotenv
 
 
-```bash
+```markdown
 #########################
 ## Application Variables
 

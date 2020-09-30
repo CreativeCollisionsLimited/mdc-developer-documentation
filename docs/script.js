@@ -9,10 +9,6 @@ new Docute({
             link: '/'
         },
         {
-            title: 'About',
-            link: '/about'
-        },
-        {
             title: 'Links',
             link: '/links'
         }
@@ -27,7 +23,7 @@ new Docute({
                     link: '/installation/setup'
                 },
                 {
-                    title: 'Deploy',
+                    title: 'Deploy*',
                     link: '/installation/deploy'
                 }
             ]
@@ -36,11 +32,11 @@ new Docute({
             title: 'Coding standards',
             links: [
                 {
-                    title: 'Naming conventions',
+                    title: 'Naming conventions*',
                     link: '/standards/naming'
                 },
                 {
-                    title: 'Formatting Code',
+                    title: 'Formatting Code*',
                     link: '/standards/format'
                 }
             ]
@@ -49,23 +45,23 @@ new Docute({
             title: 'Testing the code',
             links: [
                 {
-                    title: 'Overview',
+                    title: 'Overview*',
                     link: '/tests/main'
                 },
                 {
-                    title: 'Unit Tests',
+                    title: 'Unit Tests*',
                     link: '/tests/unit'
                 },
                 {
-                    title: 'Feature Test',
+                    title: 'Feature Test*',
                     link: '/tests/feature'
                 },
                 {
-                    title: 'TDD',
+                    title: 'TDD*',
                     link: '/tests/tdd'
                 },
                 {
-                    title: 'What and how to test?',
+                    title: 'What and how to test?*',
                     link: '/tests/examples'
                 }
             ]
@@ -91,7 +87,7 @@ new Docute({
             title: 'Git',
             links: [
                 {
-                    title: 'Overview',
+                    title: 'Overview*',
                     link: '/git/main'
                 },
                 {
@@ -99,16 +95,25 @@ new Docute({
                     link: '/git/code_reviews'
                 },
                 {
-                    title: 'Git Flow',
+                    title: 'Git Flow*',
                     link: '/git/git_flow'
                 },
 
                 {
-                    title: 'Branch naming conventions',
+                    title: 'Branch naming conventions*',
                     link: '/git/naming'
                 }
             ]
         },
+        {
+            title: 'Custom features',
+            links: [
+                {
+                    title: 'Text Manipulations',
+                    link: '/custom/text_manipulations'
+                }
+            ]
+        }
     ]
 
 });

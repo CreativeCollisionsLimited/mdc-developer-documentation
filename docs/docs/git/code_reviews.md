@@ -18,6 +18,23 @@ Code review is based on the simple assumption that “two heads are better than 
 
 ## Checklist
 
+- Readability
+- Maintainability
+- Security
+- Speed and Performance
+- Documentation
+- Reinventing the Wheel
+- Reliability
+- Scalability
+- Reusability
+- Patterns & Naming conventions
+- Test Coverage and Test Quality
+- Fit for Purpose
+- Notice What’s Missing
+
+
+
+
 
 ### Readability
 When reading through the code, it should be relatively easy for you to discern the role of specific functions, methods, or classes.
@@ -54,7 +71,7 @@ In other words, don’t duplicate code or functionality.
 Check that the code is written with likely future use-cases in mind.
 
 ### Patterns & Naming conventions
-Adding new code to a codebase is whether it matches the patterns that your team have already established.
+Adding new code to a code base is whether it matches the patterns that your team have already established.
 
 ### Test Coverage and Test Quality
 A flawed test is more dangerous than having no test.
@@ -66,4 +83,27 @@ Code may work, but does it work in the way that your Product Manager, CEO, or th
 ### Notice What’s Missing
 it’s important to think through edge cases, unexpected inputs, and error handling scenarios that the code’s author may not have considered.
 
+
+## GitHub merge request
+
+Copy paste this code as a comment when you make your code review.
+Check out all of passing points.
+
+```markdown
+I Checked the code against:
+
+- [ ] The code is readable
+- [ ] The code is maintainable
+- [ ] The code is secured
+- [ ] The code is performing and fast
+- [ ] The code is has documentation
+- [ ] The code is not reinventing the Wheel
+- [ ] The code is reliable
+- [ ] The code is scalable
+- [ ] The code is reusable
+- [ ] The code is following the patterns & naming conventions
+- [ ] The code is test covered and test methodology is good
+- [ ] The code is fit for purpose
+- [ ] I did not notice anything is missing
+```
 
