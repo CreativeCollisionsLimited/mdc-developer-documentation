@@ -35,7 +35,11 @@ new Docute({
             title: 'Coding standards',
             links: [
                 {
-                    title: 'Naming conventions*',
+                    title: 'Overview',
+                    link: '/standards/main'
+                },
+                {
+                    title: 'Naming conventions',
                     link: '/standards/naming'
                 },
                 {
@@ -48,16 +52,8 @@ new Docute({
             title: 'Testing the code',
             links: [
                 {
-                    title: 'Overview*',
+                    title: 'Overview',
                     link: '/tests/main'
-                },
-                {
-                    title: 'Unit Tests*',
-                    link: '/tests/unit'
-                },
-                {
-                    title: 'Feature Test*',
-                    link: '/tests/feature'
                 },
                 {
                     title: 'TDD*',
@@ -66,7 +62,28 @@ new Docute({
                 {
                     title: 'What and how to test?*',
                     link: '/tests/examples'
+                },
+                {
+                    title: 'Unit Tests',
+                    link: '/tests/unit'
+                },
+                {
+                    title: 'API Test*',
+                    link: '/tests/api'
+                },
+                {
+                    title: 'Feature Test*',
+                    link: '/tests/feature'
+                },
+                {
+                    title: 'Integration Test*',
+                    link: '/tests/integration'
+                },
+                {
+                    title: 'Types of tests explained',
+                    link: '/tests/types'
                 }
+
             ]
         },
         {
