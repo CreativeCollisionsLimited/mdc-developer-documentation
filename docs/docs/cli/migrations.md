@@ -3,9 +3,9 @@
 
 Migrations are a built in tool in the yii2 framework. This feature is allowing us to keep track and replicate all of the database changes in different environments.
 
-<Note>
+<Note type="warning">
 
-All structural and schema changes need to be implemented and executed as a migration
+All structural and schema changes on the database need to be implemented and executed as a migration!
 
 [More details about Yii2 migrations](https://www.yiiframework.com/doc/guide/2.0/en/db-migrations)
 
