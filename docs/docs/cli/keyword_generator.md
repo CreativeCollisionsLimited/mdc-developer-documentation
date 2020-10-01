@@ -33,6 +33,6 @@ Generates keywords for the `hs_heading` table.
 ## Run Generator
 
 
-```
+```bash
 php yii keyworld-generator/all
 ```

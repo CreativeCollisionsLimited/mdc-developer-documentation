@@ -78,20 +78,22 @@ SUPPORT_EMAIL = ''
 ADMIN_EMAIL = ''
 
 COOKIE_VALIDATION_KEY = ''
+
 TIMEZONE = 'Europe/Dublin'
+API_TOKEN_EXPIRE = 2592000 #3600 * 24 * 30 (30 DAYS)
+
 
 # Database
 DB_DSN = 'mysql:host=localhost;dbname=mdc'
 DB_USERNAME = 'mdc'
 DB_PASSWORD = ''
 
+
 # Mail
-#MAIL_TRANSPORT_HOST = ''
-#MAIL_TRANSPORT_PORT = '465'
-#MAIL_TRANSPORT_USERNAME = ''
-#MAIL_TRANSPORT_PASSWORD = ''
-
-
+MAIL_TRANSPORT_HOST = ''
+MAIL_TRANSPORT_PORT = '465'
+MAIL_TRANSPORT_USERNAME = ''
+MAIL_TRANSPORT_PASSWORD = ''
 
 
 # Public Links:
@@ -100,7 +102,7 @@ TWITTER_URL = 'https://twitter.com/MyPostLocal'
 LINKEDIN_URL = '#'
 YOUTUBE_URL = 'https://www.youtube.com/channel/UCxKKKQGKTyL0fEm-RwzsHZA?view_as=subscriber'
 
-API_TOKEN_EXPIRE = 2592000 #3600 * 24 * 30 (30 DAYS)
+
 
 
 
