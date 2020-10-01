@@ -3,6 +3,9 @@
 new Docute({
     target: '#docute',
     sourcePath: './docs/',
+    detectSystemDarkTheme: true,
+    darkThemeToggler: true,
+    highlight: ['js', 'bash', 'php', 'markdown', 'sql', 'json', 'regex', 'sass', 'less', 'html', 'git'],
     nav: [
         {
             title: 'Home',

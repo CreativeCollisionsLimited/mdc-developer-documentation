@@ -52,14 +52,14 @@ The command can accept table names in snake case like my_table_name or encapsula
 </Note>
 
 Example:
-```bash
+```php
 php yii seeder/create table_name
 ```
 
 
 This will create a new template file inside the `/console/seeders/` folder with the table name in camelCase followed by Seeder.php
 with the following code:
-```PHP
+```php
 <?php
 
 class tableNameSeeder {

@@ -4,7 +4,7 @@ Text helpers to achieve certain text outputs via traits.
 
 **usage:**
 Include the trait in your class like a normal trait.
-```PHP
+```php
 use \common\traits\TextManipulator;
 ```
 
@@ -13,7 +13,7 @@ use \common\traits\TextManipulator;
 Yii2 has a function to camelise, but that is not camelCase, that is make the text to PascalCase.
 
 **usage:**
-```PHP
+```php
 $this->camelCase(string $string)
 ```
 **Return:** camelCase formatted String
@@ -31,7 +31,7 @@ Creates snake_case formatted string from a string
 
 
 **usage:**
-```PHP
+```php
 $this->snakeCase(string $string)
 ```
 **Return:** snake_case formatted String
@@ -78,7 +78,7 @@ This function ignore the following words to run on it:
 
 
 **usage:**
-```
+```php
 $this->singularize($word);
 ```
 **Accept:** string
@@ -97,7 +97,7 @@ This will get a multiple world string, explode them to Individual words, and run
 then rejoin them and return as a string.
 
 **usage:**
-```
+```php
 $this->regulateSearchTerms($word);
 ```
 **Accept:** string
@@ -105,11 +105,11 @@ $this->regulateSearchTerms($word);
 **Result:** string
 
 #### example:
-```
+```php
 $this->regulateSearchTerms('Bag Of bannanas');
 ```
 will result:
-```
+```php
 bag of banana
 ```
 
@@ -129,7 +129,7 @@ This will get a string, and run the following filters on each word:
 * trim
 
 **usage:**
-```
+```php
 $this->normaliseSearchInput($words);
 ```
 **Accept:** string
@@ -137,10 +137,10 @@ $this->normaliseSearchInput($words);
 **Result:** string
 
 #### example:
-```
+```php
 $this->regulateSearchTerms('Bag Of Bannanas');
 ```
 will result:
-```
+```php
 bag banana
 ```
