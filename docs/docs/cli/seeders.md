@@ -52,7 +52,7 @@ The command can accept table names in snake case like my_table_name or encapsula
 </Note>
 
 Example:
-```php
+```bash
 php yii seeder/create table_name
 ```
 
