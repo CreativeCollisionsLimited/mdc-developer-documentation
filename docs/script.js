@@ -26,8 +26,8 @@ new Docute({
                     link: '/installation/setup'
                 },
                 {
-                    title: 'Deploy*',
-                    link: '/installation/deploy'
+                    title: 'Manual Deployment',
+                    link: '/installation/manual_deploy'
                 }
             ]
         },

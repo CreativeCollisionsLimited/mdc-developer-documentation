@@ -1,35 +1,40 @@
 
 ## System requrements
+The project is using LAMP stack
+[how to setup a lamp stack on Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-ubuntu-18-04)
 
 
-### Database
-MySql 5 or newer
+**Apache2**\
+_Version: <Badge type="success">2.4</Badge>_
 
+[How to setup an apache webserver](https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-18-04)
 
-### Apache<Badge type="success">2.4</Badge> Webserver
-
-_Version: 2.4_
-
-**Required Modules:**
+Required Modules:
 * rewrite
 
+**MySQL**\
+_Version: <Badge type="success">5.6 or newer</Badge>_
+
+[How to setup and secure mysql](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-18-04)
 
 
-### PHP <Badge type="success">7.2</Badge>
 
-_Version: 7.2  or newer_
+**PHP**\
+_Version: <Badge type="success">7.2  or newer</Badge>_
 
 <Note type="warning">
-
 Our project currently not compatible with php 7.4 or higher!
-
 </Note>
 
-**Required PHP libraries:**
+
+[How To Run Multiple PHP Versions on a server](https://www.digitalocean.com/community/tutorials/how-to-run-multiple-php-versions-on-one-server-using-apache-and-php-fpm-on-ubuntu-18-04)
+
+Required PHP libraries:
 * soap
 * gd
 * zip
 * curl
+
 
 
 ## Setup the project
