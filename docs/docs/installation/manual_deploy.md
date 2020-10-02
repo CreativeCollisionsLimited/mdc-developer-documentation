@@ -1,0 +1,279 @@
+# Manual deployment
+Symlink strategy for an already existing project
+With an assumption all system require met, and the server is accessible for deployment.
+
+Benefits:\
+On deployment fail the previous version can rolled back within 1-2 minutes, with a few commands.
+
+structure:
+```bash
+/var/www/mdc/{timestamp_dir}/
+/var/www/mdc/@active_dir/ # Points to the 'active' version of the site
+/var/www/mdc/environment  # the real enviroment file for `.env` smylink file inside the active folder
+```
+
+## Deployment schedule
+--SANDIP--
+
+## Summary
+
+* Preparation
+    * Create Backups
+    * Create Folder
+    * Create symlink folder
+    * Create symlink environment file
+    * Create site configuration file <Badge type="success">optional</Badge>
+* File Deploy
+    * Upload or pull the files
+    * change file permissions
+* Database Changes
+    * Run Migrations
+    * Run Seeders <Badge type="success">optional</Badge>
+* Enable Site
+* Validate Deployment
+
+
+
+## Preparation
+
+
+### Create Backups:
+
+* Database Backup
+* Files backup <Badge type="success">optional</Badge>
+
+
+### Create folder
+
+create new site folder with the current timestamp. If this is the first time deploy, create a symlink points to that folder
+
+```bash
+mkdir /var/www/mdc/$(date +%Y-%m-%d_%H-%M)
+```
+
+
+
+### Create symlink folder
+
+create `active_dir` Symlink:
+```bash
+ln -s /var/www/mdc/{timestamp_dir} /var/www/mdc/active_dir
+```
+
+or Edit `active_dir` Symlink
+```bash
+ln -sfn /var/www/mdc/{timestamp_dir} /var/www/mdc/active_dir
+```
+
+
+### Create symlink environment file
+
+
+```bash
+ln -s /var/www/mdc/environment /var/www/mdc/active_dir/.env
+```
+
+
+
+
+
+### Create Site Config <Badge type="success">optional</Badge>
+
+If this is the first time deploy, create the `.conf` file at `/etc/apache2/sites-available/` pointing to the `@active_dir` symlink
+
+example:
+
+```bash
+nano /etc/apache2/sites-available/ecomduty.com.conf
+```
+
+in this example we put two virtual-host in the same file, but that can be in separate file
+
+```html
+<VirtualHost *:80>
+    ServerName ecomduty.com
+    ServerAlias www.ecomduty.com
+    DocumentRoot "/var/www/mdc/active_dir/frontend/web/"
+
+
+    ErrorLog ${APACHE_LOG_DIR}/mdc_web_error.log
+    CustomLog ${APACHE_LOG_DIR}/mdc_web_access.log combined
+
+
+    <Directory "/var/www/mdc/active_dir/frontend/web/">
+        # use mod_rewrite for pretty URL support
+        RewriteEngine on
+        # If a directory or a file exists, use the request directly
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        # Otherwise forward the request to index.php
+        RewriteRule . index.php
+
+        # use index.php as index file
+        DirectoryIndex index.php
+
+        # ...other settings...
+        # Apache 2.4
+        Require all granted
+
+
+
+    </Directory>
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerName api.ecomduty.com
+    DocumentRoot "/var/www/mdc/active_dir/api/web/"
+
+
+    ErrorLog ${APACHE_LOG_DIR}/mdc_api_error.log
+    CustomLog ${APACHE_LOG_DIR}/mdc_api_access.log combined
+
+
+    <Directory "/var/www/mdc/active_dir/api/web/">
+        # use mod_rewrite for pretty URL support
+        RewriteEngine on
+        # If a directory or a file exists, use the request directly
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        # Otherwise forward the request to index.php
+        RewriteRule . index.php
+
+        # use index.php as index file
+        DirectoryIndex index.php
+
+        # ...other settings...
+        # Apache 2.4
+        Require all granted
+
+    </Directory>
+</VirtualHost>
+
+```
+
+
+
+## File Deploy
+### Upload the files our pull the git
+
+
+### change permissions
+
+
+```bash
+sudo chown -R www-data:www-data /var/www/mdc
+sudo chmod -R 775 /var/www/mdc/
+sudo chmod -R 777 /var/www/mdc/console/runtime
+sudo chmod -R 777 /var/www/mdc/api/runtime
+sudo chmod -R 777 /var/www/mdc/frontend/runtime
+sudo chmod -R 777 /var/www/mdc/frontend/web/assets
+sudo chmod -R 777 /var/www/mdc/frontend/web/media
+```
+
+Or create a file like `yii2_permission_correction.sh` and copy paste the following:
+```bash
+#!/bin/bash
+
+LOCATION="/var/www/mdc"
+USER="www-data"
+GROUP="www-data"
+DEFAULT_PERMISSION="775"
+SPECIAL_PERMISSION="777"
+
+# Defaults
+sudo chown -R ${USER}:${GROUP} ${LOCATION}
+sudo chmod -R ${DEFAULT_PERMISSION} ${LOCATION}
+# Api
+sudo chmod -R ${SPECIAL_PERMISSION} ${LOCATION}/api/runtime
+# Console
+sudo chmod -R ${SPECIAL_PERMISSION} ${LOCATION}/console/runtime
+# Frontend
+sudo chmod -R ${SPECIAL_PERMISSION} ${LOCATION}/frontend/runtime
+sudo chmod -R ${SPECIAL_PERMISSION} ${LOCATION}/frontend/web/media
+sudo chmod -R ${SPECIAL_PERMISSION} ${LOCATION}/frontend/web/assets
+```
+
+Give execution permission to the file
+```bash
+sudo chmod +x yii2_permission_correction.sh
+```
+Change the location to mach with your folder with the timestamp
+
+```bash
+nano yii2_permission_correction.sh
+```
+
+run the file: _(sudo permission needed)_
+```bash
+./yii2_permission_correction.sh
+```
+
+
+
+
+
+## Database Changes
+
+### Run the Migrations
+
+Navigate your self to the project and inside the timestamped directory and execute the following command
+```bash
+php yii migrate
+```
+[- More information on migrations](/cli/migrations)
+
+
+### Run the Seeders  <Badge type="success">optional</Badge>
+
+If this is a First time deployment, you need to run the seeders.
+the current system dont know what was already seeded, so you only want to run this file once.
+in case of fail, you can re run the migration with a fresh param like `php yii migrate/fresh`
+
+```bash
+php yii seeder/all
+```
+
+[- More information on seeders](/cli/seeders)
+
+
+## Enable Site
+
+For the first time you need to enable the site
+```bash
+a2ensite ecomduty.com
+```
+
+To enable the new active vesion you need to edit the symlink to point to the new folder
+```bash
+ln -sfn /var/www/mdc/{timestamp_dir} /var/www/mdc/active_dir
+```
+
+reload the webserver
+```bash
+sudo service apache2 reload
+```
+
+
+
+
+
+## Deployment validation
+
+validate the website by checking the web browser, and try to create an account and a parcel.
+
+pages to validate:
+* ecomduty.com
+* api.ecomduty.com
+* ecomduty.com/login
+* ecomduty.com/admin
+
+
+
+
+## Rollback
+
+### rollback migrations
+### Rollback to previous site
+### remove failed deployment files
+### validate site
+
