@@ -1,7 +1,6 @@
 /* globals Docute */
 
 if (!localStorage.getItem('timestamp_dir')) {
-    alert("helo");
     localStorage.setItem('timestamp_dir', "2020-10-02_12-00");
 }
 
