@@ -13,7 +13,8 @@ structure:
 ```
 
 ## Deployment schedule
---SANDIP--
+--SANDIP--\
+-- PLEASE fill out this section --
 
 ## Summary
 
@@ -156,6 +157,19 @@ in this example we put two virtual-host in the same file, but that can be in sep
 ## File Deploy
 ### Upload the files our pull the git
 
+Upload the files and or copy them into the timestamped folder
+
+OR
+
+clone the project and checkout the correct branch
+```git
+git clone git@github.com:nialldj/MyDutyPaid.git /var/www/mdc/{timestamp_dir}
+git fetch
+git checkout development
+```
+
+
+
 
 ### change permissions
 
@@ -208,7 +222,20 @@ run the file: _(sudo permission needed)_
 ./yii2_permission_correction.sh
 ```
 
+### Get dependencies
 
+```bash
+composer install
+```
+
+
+
+### Run compilations????
+
+-- Pietro --
+
+* notification-cron-job? -- DO WE WANT TO RUN THIS? --
+* asset/compress? -- is this working? and do we want to run this? --
 
 
 
@@ -236,6 +263,13 @@ php yii seeder/all
 [- More information on seeders](/cli/seeders)
 
 
+### Run keyword generator
+```bash
+php yii keyworld-generator/all
+```
+
+
+
 ## Enable Site
 
 For the first time you need to enable the site
@@ -258,22 +292,46 @@ sudo service apache2 reload
 
 
 ## Deployment validation
+Validation of the deployment is depending on the environment!
 
-validate the website by checking the web browser, and try to create an account and a parcel.
+You can soft validate the website by checking it in the web browser, and try to create an account maybe and a parcel.
 
-pages to validate:
+pages to validate for example:
 * ecomduty.com
 * api.ecomduty.com
 * ecomduty.com/login
 * ecomduty.com/admin
 
-
-
+Run all of the integration, unit and system test.
+<note type="warning">
+Make sure no destructive test executed, like mass system injections and stress tests.
+</note>
 
 ## Rollback
 
 ### rollback migrations
-### Rollback to previous site
-### remove failed deployment files
-### validate site
+If in the failed deployment was any changes to the database you need to rollback the migrations with one step. (not one item)
+navigate to the current active folder and run the migration rollback
 
+```bash
+php yii migrate/down
+
+```
+
+### Rollback to previous site
+to activate the last working version you need to edit the symlink to point to the correct location and reload the webserver
+```bash
+ln -sfn /var/www/mdc/{previous_timestamp_dir} /var/www/mdc/active_dir
+```
+
+Reload the webserver
+```bash
+sudo service apache2 reload
+```
+
+### Remove failed deployment files
+
+You can ether delete the the folder with the failed deployment or mark it by renaming it something meaningful for example: `failed_2020.01.01_20:18`.
+
+### validate site
+To validate the site, go thru the deployment validation
