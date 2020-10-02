@@ -7,10 +7,20 @@ On deployment fail the previous version can rolled back within 1-2 minutes, with
 
 structure:
 ```bash
-/var/www/mdc/{timestamp_dir}/
+/var/www/mdc/{{timestamp_dir}}/
 /var/www/mdc/@active_dir/ # Points to the 'active' version of the site
 /var/www/mdc/environment  # the real enviroment file for `.env` smylink file inside the active folder
 ```
+
+<note type="tip">
+
+You can set the timestamp_dir variable in the browser's local storage, <br>just don't forget to reload the page :) <br>
+Currently is set to: {{timestamp_dir}}<br>
+
+In the Light blue box you will find the calculated command
+
+</note>
+
 
 ## Deployment schedule
 --SANDIP--\
@@ -49,6 +59,7 @@ structure:
 create new site folder with the current timestamp. If this is the first time deploy, create a symlink points to that folder
 
 ```bash
+mkdir /var/www/mdc
 mkdir /var/www/mdc/$(date +%Y-%m-%d_%H-%M)
 ```
 
@@ -57,23 +68,35 @@ mkdir /var/www/mdc/$(date +%Y-%m-%d_%H-%M)
 ### Create symlink folder
 
 create `active_dir` Symlink:
+
 ```bash
-ln -s /var/www/mdc/{timestamp_dir} /var/www/mdc/active_dir
+ln -s /var/www/mdc/{{timestamp_dir}} /var/www/mdc/active_dir
+
 ```
+<pre class="spec">
+ln -s /var/www/mdc/{{timestamp_dir}} /var/www/mdc/active_dir
+</pre>
+
 
 or Edit `active_dir` Symlink
 ```bash
-ln -sfn /var/www/mdc/{timestamp_dir} /var/www/mdc/active_dir
+ln -sfn /var/www/mdc/{{timestamp_dir}} /var/www/mdc/active_dir
 ```
+<pre class="spec">
+ln -sfn /var/www/mdc/{{timestamp_dir}} /var/www/mdc/active_dir
+</pre>
 
 
 ### Create symlink environment file
-
+To get the environment file see the [setup](/installation/setup#enviroment-variables).
 
 ```bash
-ln -s /var/www/mdc/environment /var/www/mdc/active_dir/.env
+ln -s /var/www/mdc/environment.env /var/www/mdc/{{timestamp_dir}}/.env
 ```
 
+<pre class="spec">
+ln -s /var/www/mdc/environment.env /var/www/mdc/{{timestamp_dir}}/.env
+</pre>
 
 
 
@@ -85,7 +108,7 @@ If this is the first time deploy, create the `.conf` file at `/etc/apache2/sites
 example:
 
 ```bash
-nano /etc/apache2/sites-available/ecomduty.com.conf
+sudo nano /etc/apache2/sites-available/ecomduty.com.conf
 ```
 
 in this example we put two virtual-host in the same file, but that can be in separate file
@@ -152,6 +175,11 @@ in this example we put two virtual-host in the same file, but that can be in sep
 
 ```
 
+check the apache configuration with
+```
+apachectl configtest
+```
+
 
 
 ## File Deploy
@@ -162,27 +190,48 @@ Upload the files and or copy them into the timestamped folder
 OR
 
 clone the project and checkout the correct branch
-```git
-git clone git@github.com:nialldj/MyDutyPaid.git /var/www/mdc/{timestamp_dir}
+<note type="warning">
+if you already have the symlink environment file, you need to delete it first, clone the repo then re-run the [symlink generation command](/installation/manual_deploy#create-symlink-environment-file).
+</note>
+```bash
+git clone git@github.com:nialldj/MyDutyPaid.git /var/www/mdc/{{timestamp_dir}}
+cd /var/www/mdc/{{timestamp_dir}}
 git fetch
 git checkout development
 ```
 
+<pre class="spec">
+git clone git@github.com:nialldj/MyDutyPaid.git /var/www/mdc/{{timestamp_dir}}
+cd /var/www/mdc/{{timestamp_dir}}
+git fetch
+git checkout development
+</pre>
 
 
 
-### change permissions
+
+### Change permissions
 
 
 ```bash
-sudo chown -R www-data:www-data /var/www/mdc
-sudo chmod -R 775 /var/www/mdc/
-sudo chmod -R 777 /var/www/mdc/console/runtime
-sudo chmod -R 777 /var/www/mdc/api/runtime
-sudo chmod -R 777 /var/www/mdc/frontend/runtime
-sudo chmod -R 777 /var/www/mdc/frontend/web/assets
-sudo chmod -R 777 /var/www/mdc/frontend/web/media
+sudo chown -R www-data:www-data /var/www/mdc/{{timestamp_dir}}
+sudo chmod -R 775 /var/www/mdc/{{timestamp_dir}}/
+sudo chmod -R 777 /var/www/mdc/{{timestamp_dir}}/console/runtime
+sudo chmod -R 777 /var/www/mdc/{{timestamp_dir}}/api/runtime
+sudo chmod -R 777 /var/www/mdc/{{timestamp_dir}}/frontend/runtime
+sudo chmod -R 777 /var/www/mdc/{{timestamp_dir}}/frontend/web/assets
+sudo chmod -R 777 /var/www/mdc/{{timestamp_dir}}/frontend/web/media
 ```
+<pre class="spec">
+sudo chown -R www-data:www-data /var/www/mdc/{{timestamp_dir}}
+sudo chmod -R 775 /var/www/mdc/{{timestamp_dir}}/
+sudo chmod -R 777 /var/www/mdc/{{timestamp_dir}}/console/runtime
+sudo chmod -R 777 /var/www/mdc/{{timestamp_dir}}/api/runtime
+sudo chmod -R 777 /var/www/mdc/{{timestamp_dir}}/frontend/runtime
+sudo chmod -R 777 /var/www/mdc/{{timestamp_dir}}/frontend/web/assets
+sudo chmod -R 777 /var/www/mdc/{{timestamp_dir}}/frontend/web/media
+</pre>
+
 
 Or create a file like `yii2_permission_correction.sh` and copy paste the following:
 ```bash
@@ -274,13 +323,17 @@ php yii keyworld-generator/all
 
 For the first time you need to enable the site
 ```bash
-a2ensite ecomduty.com
+sudo a2ensite ecomduty.com
 ```
 
 To enable the new active vesion you need to edit the symlink to point to the new folder
 ```bash
-ln -sfn /var/www/mdc/{timestamp_dir} /var/www/mdc/active_dir
+ln -sfn /var/www/mdc/{{timestamp_dir}} /var/www/mdc/active_dir
 ```
+<pre class="spec">
+ln -sfn /var/www/mdc/{{timestamp_dir}} /var/www/mdc/active_dir
+</pre>
+
 
 reload the webserver
 ```bash

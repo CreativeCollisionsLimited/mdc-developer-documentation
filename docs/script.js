@@ -1,11 +1,22 @@
 /* globals Docute */
 
+if (!localStorage.getItem('timestamp_dir')) {
+    alert("helo");
+    localStorage.setItem('timestamp_dir', "2020-10-02_12-00");
+}
+
+var timestamp_dir = localStorage.getItem('timestamp_dir');
+
+
+
+
 new Docute({
+
     target: '#docute',
     sourcePath: './docs/',
     detectSystemDarkTheme: true,
     darkThemeToggler: true,
-    highlight: ['js', 'bash', 'php', 'markdown', 'sql', 'json', 'regex', 'sass', 'less', 'html', 'git'],
+    highlight: ['js', 'bash', 'php', 'markdown', 'sql', 'json', 'regex', 'sass', 'less', 'html', 'git', 'vue'],
     nav: [
         {
             title: 'Home',

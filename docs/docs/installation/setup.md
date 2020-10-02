@@ -58,6 +58,8 @@ To setup the project you need to use `.env` variables.
 You need to create a `.env` file in the root of the project.
 You can ether use the example bellow and fill out the fields or copy the `.env.example` file and change it's contents.
 
+If you wish to follow the deployment process, make sure you saved the filled environment variables under `/var/www/mdc/environment.env`.
+
 
 dotenv plugin: https://github.com/vlucas/phpdotenv
 
