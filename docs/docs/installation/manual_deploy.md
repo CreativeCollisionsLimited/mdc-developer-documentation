@@ -217,6 +217,8 @@ git checkout development
 sudo chown -R www-data:www-data /var/www/mdc/{{timestamp_dir}}
 sudo chmod -R 775 /var/www/mdc/{{timestamp_dir}}/
 sudo chmod -R 777 /var/www/mdc/{{timestamp_dir}}/console/runtime
+sudo chmod -R 777 /var/www/mdc/{{timestamp_dir}}/console/rbac
+
 sudo chmod -R 777 /var/www/mdc/{{timestamp_dir}}/api/runtime
 sudo chmod -R 777 /var/www/mdc/{{timestamp_dir}}/frontend/runtime
 sudo chmod -R 777 /var/www/mdc/{{timestamp_dir}}/frontend/web/assets
@@ -226,6 +228,7 @@ sudo chmod -R 777 /var/www/mdc/{{timestamp_dir}}/frontend/web/media
 sudo chown -R www-data:www-data /var/www/mdc/{{timestamp_dir}}
 sudo chmod -R 775 /var/www/mdc/{{timestamp_dir}}/
 sudo chmod -R 777 /var/www/mdc/{{timestamp_dir}}/console/runtime
+sudo chmod -R 777 /var/www/mdc/{{timestamp_dir}}/console/rbac
 sudo chmod -R 777 /var/www/mdc/{{timestamp_dir}}/api/runtime
 sudo chmod -R 777 /var/www/mdc/{{timestamp_dir}}/frontend/runtime
 sudo chmod -R 777 /var/www/mdc/{{timestamp_dir}}/frontend/web/assets
@@ -250,6 +253,8 @@ sudo chmod -R ${DEFAULT_PERMISSION} ${LOCATION}
 sudo chmod -R ${SPECIAL_PERMISSION} ${LOCATION}/api/runtime
 # Console
 sudo chmod -R ${SPECIAL_PERMISSION} ${LOCATION}/console/runtime
+sudo chmod -R ${SPECIAL_PERMISSION} ${LOCATION}/console/rbac
+
 # Frontend
 sudo chmod -R ${SPECIAL_PERMISSION} ${LOCATION}/frontend/runtime
 sudo chmod -R ${SPECIAL_PERMISSION} ${LOCATION}/frontend/web/media
