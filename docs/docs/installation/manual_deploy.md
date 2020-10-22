@@ -23,8 +23,8 @@ In the Light blue box you will find the calculated command
 
 
 ## Deployment schedule
---SANDIP--\
--- PLEASE fill out this section --
+* Twice Weekly Deployments
+	* Tuesday and Thursday 
 
 ## Summary
 
@@ -194,17 +194,17 @@ clone the project and checkout the correct branch
 if you already have the symlink environment file, you need to delete it first, clone the repo then re-run the [symlink generation command](/installation/manual_deploy#create-symlink-environment-file).
 </note>
 ```bash
-git clone git@github.com:nialldj/MyDutyPaid.git /var/www/mdc/{{timestamp_dir}}
 cd /var/www/mdc/{{timestamp_dir}}
-git fetch
-git checkout development
+git init
+git remote add origin https://github.com/nialldj/MyDutyPaid.git 
+git pull origin development
 ```
 
 <pre class="spec">
-git clone git@github.com:nialldj/MyDutyPaid.git /var/www/mdc/{{timestamp_dir}}
 cd /var/www/mdc/{{timestamp_dir}}
-git fetch
-git checkout development
+git init
+git remote add origin https://github.com/nialldj/MyDutyPaid.git 
+git pull origin development
 </pre>
 
 
@@ -281,7 +281,15 @@ run the file: _(sudo permission needed)_
 ```bash
 composer install
 ```
+### Change folder permission after dependencies installation
 
+
+```bash
+sudo chmod -R 775 /var/www/mdc/{{timestamp_dir}}/vender
+```
+<pre class="spec">
+sudo chmod -R 775 /var/www/mdc/{{timestamp_dir}}/vender
+</pre>
 
 
 ### Run compilations????
