@@ -285,10 +285,10 @@ composer install
 
 
 ```bash
-sudo chmod -R 775 /var/www/mdc/{{timestamp_dir}}/vender
+sudo chmod -R 775 /var/www/mdc/{{timestamp_dir}}/vendor
 ```
 <pre class="spec">
-sudo chmod -R 775 /var/www/mdc/{{timestamp_dir}}/vender
+sudo chmod -R 775 /var/www/mdc/{{timestamp_dir}}/vendor
 </pre>
 
 
