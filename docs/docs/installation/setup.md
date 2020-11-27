@@ -71,6 +71,8 @@ dotenv plugin: https://github.com/vlucas/phpdotenv
 YII_ENV = 'dev'
 YII_DEBUG = true
 
+YII_DEBUG_IPS = "127.0.0.1|xxx.xxx.xxx.xxx" # use the filter character '|' to add ips to this list
+
 HTTP_PROTOCOL = 'http'
 
 PUBLIC_URL = 'mdc.loc/'
