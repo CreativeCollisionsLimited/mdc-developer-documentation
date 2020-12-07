@@ -118,6 +118,13 @@ YOUTUBE_URL = 'https://www.youtube.com/channel/UCxKKKQGKTyL0fEm-RwzsHZA?view_as=
 ####################
 ## Application Keys
 
+# CDS API (Pre-Prod)
+# you can get this key in the CDS website /  Manage organization preferences / Security token (for accessing CDS.API)
+### Pre-PROD: https://cds.preprod.upu.org
+### PROD: https://cds.post/
+
+CDS_API_GUID = ''
+
 # Stripe TEST KEYS
 STRIPE_PUBLIC_KEY = 'pk_test_'
 STRIPE_API_KEY = 'sk_test_'
