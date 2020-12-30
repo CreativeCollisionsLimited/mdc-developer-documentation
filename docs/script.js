@@ -110,7 +110,11 @@ new Docute({
                 {
                     title: 'Keyword generator',
                     link: '/cli/keyword_generator'
-                }
+                },
+		{
+		    title: 'Cron',
+		    link: '/cli/cron'
+		}
             ]
         },
         {
