@@ -77,3 +77,16 @@ To run commands inside the container use the docker interactive exec:
 docker exec -it mdc-app /bin/bash
 ```
 
+## Database migration and seeding
+To be able to use the application you will need to migrate the database then seed the initial data.
+>Note: This step need to be taken every time when you stop or rebuild the container.
+
+To do this, log in to the container with the above command, and simply run the following:
+```bash
+php yii migrate
+```
+And the seeder:
+```bash
+php yii seeder 
+```
+
