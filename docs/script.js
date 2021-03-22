@@ -38,6 +38,10 @@ new Docute({
                 {
                     title: 'Manual Deployment',
                     link: '/installation/manual_deploy'
+                },
+                {
+                    title: 'Docker Deployment',
+                    link: '/installation/docker_deploy'
                 }
             ]
         },
