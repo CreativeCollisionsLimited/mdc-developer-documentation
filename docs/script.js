@@ -115,6 +115,10 @@ new Docute({
                     title: 'Keyword generator',
                     link: '/cli/keyword_generator'
                 },
+                {
+                    title: 'Taric Processor',
+                    link: '/cli/taric_update_process'
+                },
 		{
 		    title: 'Cron',
 		    link: '/cli/cron'
