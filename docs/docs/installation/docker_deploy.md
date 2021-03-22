@@ -90,3 +90,11 @@ And the seeder:
 php yii seeder 
 ```
 
+### Update the Tax tables
+
+```bash
+php yii taric
+```
+[- More information on the Taric processor](/cli/taric_update_process)
+> Alternatively you can skip this and inject the tables from an sql dump file
+
