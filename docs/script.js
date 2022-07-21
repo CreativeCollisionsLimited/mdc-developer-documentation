@@ -119,6 +119,10 @@ new Docute({
                     title: 'Taric Processor',
                     link: '/cli/taric_update_process'
                 },
+                {
+                    title: 'TEDB Processor',
+                    link: '/cli/tedb_update_process'
+                },
 		{
 		    title: 'Cron',
 		    link: '/cli/cron'
